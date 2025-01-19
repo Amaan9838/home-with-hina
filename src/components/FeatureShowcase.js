@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { Phone, User } from 'lucide-react';
 import AmenitiesShowcase from './AmenitiesShowcase';
+import FeaturedProperties from './FeaturedProperties';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -70,6 +71,7 @@ export default function PropertyFeatureShowcase() {
           </div>
         </motion.div>
       </section>
+      <FeaturedProperties/>
       <section className="py-32 bg-[#f8f5f0]">
       <div className="container mx-auto max-w-7xl px-4">
         <motion.div 
@@ -278,7 +280,7 @@ const floorPlans = [
     type: "1 BHK Premium",
     area: "800 sq.ft",
     price: "Starting ₹45L",
-    image: "https://images.unsplash.com/photo-1600566752547-c06d0cd821be?q=80",
+    image: "/1BHK.png",
     features: [
       "Master Bedroom: 14' x 12'",
       "Living Room: 16' x 14'",
@@ -296,7 +298,7 @@ const floorPlans = [
     type: "2 BHK Luxury",
     area: "1200 sq.ft",
     price: "Starting ₹75L",
-    image: "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?q=80",
+    image: "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     features: [
       "Master Bedroom: 16' x 14'",
       "Second Bedroom: 14' x 12'",
@@ -315,7 +317,7 @@ const floorPlans = [
     type: "3 BHK Elite",
     area: "1800 sq.ft",
     price: "Starting ₹1.2Cr",
-    image: "https://images.unsplash.com/photo-1600573472591-ee6981cf35b6?q=80",
+    image: "https://images.unsplash.com/photo-1562438668-bcf0ca6578f0?q=80&w=2060&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     features: [
       "Master Bedroom: 18' x 16'",
       "Second Bedroom: 16' x 14'",
@@ -338,8 +340,9 @@ const propertyData = {
   title: "Find Your Dream Home with Hina!",
   location: "SBP Ambala Chandigarh Highway, Derabassi Mohali",
   heroImages: [
-    "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80", // Modern apartment exterior
-    "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80", // Luxury building front
+    "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0", // Modern apartment exterior
+    "/3BHK.jpg", // Luxury building front
+    "https://img.freepik.com/free-photo/modern-studio-apartment-design-with-bedroom-living-space_1262-12375.jpg?t=st=1737287383~exp=1737290983~hmac=717d83e6a0e2492292b5aff5b2ec4984441efee00d218a97c8f930fd51a42f7c&w=996", // Apartment interior
     "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80"  // Premium entrance
   ],
   features: [

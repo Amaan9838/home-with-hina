@@ -1,5 +1,6 @@
 import { Montserrat, Kaushan_Script } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 
 const geist = Montserrat({
   variable: "--font-geist",
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geist.variable} ${pacifico.variable} antialiased`}>
+        <Navbar />
         {children}
       </body>
     </html>

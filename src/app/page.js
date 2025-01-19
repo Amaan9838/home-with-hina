@@ -1,4 +1,3 @@
-import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import FeaturedProperties from '@/components/FeaturedProperties';
 import VirtualStaging from '@/components/VirtualStaging';
@@ -10,12 +9,10 @@ import Neighbourhood from '@/components/Neighbourhood';
 export default function Home() {
   return (
     <div className="bg-cream">
-      <Navbar />
       
       {/* Initial Impact Section */}
       {/* <Hero /> */}
       <FeatureShowcase/>
-      <FeaturedProperties />
       
       <VirtualStaging />
       <Neighbourhood/>
