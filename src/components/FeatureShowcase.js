@@ -48,7 +48,7 @@ export default function PropertyFeatureShowcase() {
         ))}
         <div className="absolute inset-0 bg-black/30" />
         <motion.div 
-          className="absolute inset-0 flex items-center justify-center text-center text-white"
+          className="absolute md:inset-0 bottom-6 flex items-center justify-center text-center text-white"
           {...fadeInUp}
         >
           <div className="space-y-6 px-4">
@@ -57,8 +57,8 @@ export default function PropertyFeatureShowcase() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              <h1 className="text-4xl md:text-7xl font-serif mb-4">{propertyData.title}</h1>
-              <p className="text-xl font-light tracking-wide">{propertyData.location}</p>
+              <h1 className="text-3xl md:text-7xl font-serif mb-4">{propertyData.title}</h1>
+              <p className="text-xl hidden md:block font-light tracking-wide">{propertyData.location}</p>
             </motion.div>
             <div className="flex flex-wrap justify-center gap-4">
               {propertyData.approvals.map((approval, idx) => (
@@ -342,7 +342,7 @@ const propertyData = {
   heroImages: [
     "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0", // Modern apartment exterior
     "/3BHK.jpg", // Luxury building front
-    "https://img.freepik.com/free-photo/modern-studio-apartment-design-with-bedroom-living-space_1262-12375.jpg?t=st=1737287383~exp=1737290983~hmac=717d83e6a0e2492292b5aff5b2ec4984441efee00d218a97c8f930fd51a42f7c&w=996", // Apartment interior
+    "https://images.unsplash.com/photo-1505693314120-0d443867891c?q=80&w=1836&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Apartment interior
     "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80"  // Premium entrance
   ],
   features: [

@@ -59,7 +59,7 @@ const FeaturedProperties = () => {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className=" mb-12 flex  items-center justify-between md:gap-10"
+        className=" mb-12 flex md:flex-nowrap flex-wrap items-center justify-between md:gap-10"
       >
         <h2 className="text-4xl font-bold mb-4">Explore Our Premium Property Listings</h2>
         <p className="text-gray-600 max-w-3xl mx-auto">

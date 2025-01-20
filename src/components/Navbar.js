@@ -20,9 +20,9 @@ export default function Navbar() {
       scrolled ? 'bg-black' : 'backdrop-blur-md'
     }`}>
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center text-white h-20">
-                  <Link href="/" className="navbar-brand text-4xl font-semibold">
-            Home with Hina
+        <div className={`flex justify-between items-center text-white h-20 `}>
+                  <Link href="/" className=" text-4xl font-semibold">
+            HWH
           </Link>
           <div className="hidden md:flex items-center space-x-8">
             <Link href="/properties" className="text-white hover:text-gray-200">
@@ -60,11 +60,13 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden pb-4">
-            <Link href="/buy" className="block py-2 hover:text-primary">Buy</Link>
-            <Link href="/rent" className="block py-2 hover:text-primary">Rent</Link>
-            <Link href="/luxury" className="block py-2 hover:text-primary">Luxury</Link>
-            <Link href="/contact" className="block py-2 hover:text-primary">Contact</Link>
+          <div className={`md:hidden pb-4  ${
+      scrolled ? 'border-white border-t' : 'backdrop-blur-md'
+    } `}>
+            <Link href="/buy" className={`block py-2 hover:text-primary ${scrolled ? 'text-white' : ''}`}>Buy</Link>
+            <Link href="/rent" className={`block py-2 hover:text-primary ${scrolled ? 'text-white' : ''}`}>Rent</Link>
+            <Link href="/luxury" className={`block py-2 hover:text-primary ${scrolled ? 'text-white' : ''}`}>Luxury</Link>
+            <Link href="/contact" className={`block py-2 hover:text-primary ${scrolled ? 'text-white' : ''}`}>Contact</Link>
           </div>
         )}
       </div>
