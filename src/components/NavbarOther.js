@@ -16,33 +16,31 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-600 ${
-      scrolled ? 'bg-black' : 'backdrop-blur-md'
-    }`}>
+    <nav className={`fixed w-full z-50 transition-all duration-600 bg-white `}>
       <div className="container mx-auto px-4">
-        <div className={`flex justify-between items-center text-white h-20 `}>
+        <div className={`flex justify-between items-center text-black h-20 `}>
                   <Link href="/" className="navbar-brand text-4xl font-semibold">
             HWH
           </Link>
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-white hover:text-gray-200">
+            <Link href="/" className="text-black hover:text-gray-200">
               Properties
             </Link>
-            <Link href="/" className="text-white hover:text-gray-200">
+            <Link href="/" className="text-black hover:text-gray-200">
               About Us
             </Link>
         
-            <Link href="/contact" className="text-white hover:text-gray-200">
+            <Link href="/contact" className="text-black hover:text-gray-200">
               Contact
             </Link>
           </div>
           
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8">
-            <Link href="/" className="text-white shadow-[2px_2px_0px_0px_rgb(255,255,255)] px-6 py-3 rounded-3xl border-white hover:bg-[#8d6d36] hover:opacity-80  border">
+            <Link href="/" className="text-white shadow-[2px_2px_0px_0px_rgb(0,0,0)] px-6 py-3 rounded-3xl bg-black border-white hover:bg-[#8d6d36] hover:opacity-80  border">
               View Properties 
               </Link>
-              <Link href="/contact"  className="text-white shadow-[2px_2px_0px_0px_rgb(255,255,255)] px-6 py-3 rounded-3xl border-white bg-[#8d6d36] hover:opacity-80  border">
+              <Link href="/contact"  className="text-white shadow-[2px_2px_0px_0px_rgb(0,0,0)] px-6 py-3 rounded-3xl border-white bg-[#8d6d36] hover:opacity-80  border">
               Contact Us 
               </Link>
             </div>
@@ -60,13 +58,11 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className={`md:hidden pb-4  ${
-      scrolled ? 'border-white border-t' : 'backdrop-blur-md'
-    } `}>
-            <Link href="/" className={`block py-2 hover:text-primary ${scrolled ? 'text-white' : ''}`}>Buy</Link>
-            <Link href="/" className={`block py-2 hover:text-primary ${scrolled ? 'text-white' : ''}`}>Rent</Link>
-            <Link href="/" className={`block py-2 hover:text-primary ${scrolled ? 'text-white' : ''}`}>Luxury</Link>
-            <Link href="/contact" className={`block py-2 hover:text-primary ${scrolled ? 'text-white' : ''}`}>Contact</Link>
+          <div className={`md:hidden pb-4  `}>
+            <Link href="/" className={`block py-2 hover:text-primary `}>Buy</Link>
+            <Link href="/" className={`block py-2 hover:text-primary `}>Rent</Link>
+            <Link href="/" className={`block py-2 hover:text-primary `}>Luxury</Link>
+            <Link href="/contact" className={`block py-2 hover:text-primary `}>Contact</Link>
           </div>
         )}
       </div>

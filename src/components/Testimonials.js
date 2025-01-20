@@ -1,5 +1,125 @@
+'use client';
 import { Star } from 'lucide-react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+
+// Animation variants
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.2
+        }
+    }
+};
+
+const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.5
+        }
+    }
+};
+
+const starVariants = {
+    initial: { scale: 0 },
+    animate: { scale: 1 },
+    transition: { type: "spring", stiffness: 200, damping: 10 }
+};
+
+export default function Testimonials() {
+    return (
+        <section className="pt-12 pb-24">
+            <div className="container mx-auto px-4">
+                <motion.h2 
+                    initial={{ opacity: 0, y: -20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    className="text-[3rem] font-bold text-center mb-16"
+                >
+                    Client Experiences
+                </motion.h2>
+
+                <motion.div 
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                >
+                    {testimonials.map((testimonial, index) => (
+                        <motion.div 
+                            key={testimonial.id}
+                            variants={cardVariants}
+                            whileHover={{ 
+                                scale: 1.02,
+                                transition: { duration: 0.2 }
+                            }}
+                            className="bg-white flex flex-col gap-4 p-8 rounded-3xl shadow-[4px_4px_0px_0px_rgb(0,0,0)] border-2 border-black"
+                        >
+                            <motion.div 
+                                className="flex items-center gap-1"
+                                initial="hidden"
+                                animate="visible"
+                                variants={{
+                                    hidden: { opacity: 0 },
+                                    visible: {
+                                        opacity: 1,
+                                        transition: { staggerChildren: 0.1 }
+                                    }
+                                }}
+                            >
+                                {[...Array(5)].map((_, i) => (
+                                    <motion.div
+                                        key={i}
+                                        variants={starVariants}
+                                        whileHover={{ scale: 1.2 }}
+                                    >
+                                        <Star className="text-green-500" fill='#22c55e' size={20} />
+                                    </motion.div>
+                                ))}
+                            </motion.div>
+
+                            <motion.div 
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                transition={{ delay: 0.2 }}
+                                className="text-gray-900"
+                            >
+                                "{testimonial.quote}"
+                            </motion.div>
+
+                            <motion.div 
+                                className='flex items-center md:gap-6'
+                                initial={{ x: -20, opacity: 0 }}
+                                whileInView={{ x: 0, opacity: 1 }}
+                                transition={{ delay: 0.3 }}
+                            >
+                                <div className="relative w-12 h-12 rounded-full overflow-hidden">
+                                    <Image
+                                        src={testimonial.image}
+                                        alt={testimonial.name}
+                                        fill
+                                        className="object-cover"
+                                    />
+                                </div>
+                                <div>
+                                    <h3 className="font-semibold text-lg">{testimonial.name}</h3>
+                                    <p className="text-gray-800">{testimonial.role}</p>
+                                </div>
+                            </motion.div>
+                        </motion.div>
+                    ))}
+                </motion.div>
+            </div>
+        </section>
+    );
+}
+
 
 const testimonials = [
   {
@@ -46,49 +166,3 @@ const testimonials = [
   },
   
 ];
-
-
-export default function Testimonials() {
-  return (
-    <section className="pt-12 pb-24 ">
-      <div className="container mx-auto px-4">
-        <h2 className="text-[3rem] font-bold text-center mb-16">
-        Client Experiences
-        </h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial) => (
-            <div key={testimonial.id} className="bg-white flex flex-col gap-4 p-8 rounded-3xl shadow-[4px_4px_0px_0px_rgb(0,0,0)] border-2 border-black">
-              <div className="flex items-center gap-1 ">
-              <Star className="text-green-500" fill='#22c55e' size={20} />
-              <Star className="text-green-500" fill='#22c55e' size={20} />
-              <Star className="text-green-500" fill='#22c55e' size={20} />
-              <Star className="text-green-500" fill='#22c55e' size={20} />
-              <Star className="text-green-500" fill='#22c55e' size={20} />
-
-               
-              </div>
-              <div className="text-gray-900 ">
-                "{testimonial.quote}"
-              </div>
-              <div className='flex items-center md:gap-6 '>
-                <div className="relative w-12 h-12 rounded-full overflow-hidden">
-                  <Image
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg">{testimonial.name}</h3>
-                  <p className="text-gray-800 ">{testimonial.role}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}

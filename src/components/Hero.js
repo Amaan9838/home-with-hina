@@ -133,13 +133,13 @@ const HeroCarousel = ({ images, title, location, approvals }) => {
 
         .swiper-button-next,
         .swiper-button-prev {
-          color: white !important;
-          background: rgba(255, 255, 255, 0.2);
-          backdrop-filter: blur(4px);
+          color: black !important;
+          background: transparent;
           width: 50px !important;
           height: 50px !important;
           border-radius: 50%;
           transition: all 0.3s ease;
+          border: 2px solid rgba(0, 0, 0, 0.5);
         }
 
         .swiper-button-next:hover,
