@@ -21,7 +21,7 @@ export default function Navbar() {
     }`}>
       <div className="container mx-auto px-4">
         <div className={`flex justify-between items-center text-white h-20 `}>
-                  <Link href="/" className=" text-4xl font-semibold">
+                  <Link href="/" className="navbar-brand text-4xl font-semibold">
             HWH
           </Link>
           <div className="hidden md:flex items-center space-x-8">

@@ -1,10 +1,11 @@
 'use client';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Phone, User } from 'lucide-react';
 import AmenitiesShowcase from './AmenitiesShowcase';
 import FeaturedProperties from './FeaturedProperties';
+import HeroCarousel from './Hero';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -15,6 +16,8 @@ const fadeInUp = {
 export default function PropertyFeatureShowcase() {
   const [selectedPlan, setSelectedPlan] = useState(propertyData.floorPlans[0]);
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
 
   // Auto-rotate hero images
   useEffect(() => {
@@ -28,49 +31,11 @@ export default function PropertyFeatureShowcase() {
   return (
     <div className="bg-gradient-to-b from-[#f8f5f0] to-white">
       {/* Hero Section with Image Carousel */}
-      <section className="relative h-screen">
-        {propertyData.heroImages.map((image, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: currentHeroImage === idx ? 1 : 0 }}
-            transition={{ duration: 1 }}
-            className="absolute inset-0"
-          >
-            <Image
-              src={image}
-              fill
-              className="object-cover"
-              alt={`${propertyData.title} - View ${idx + 1}`}
-              priority={idx === 0}
-            />
-          </motion.div>
-        ))}
-        <div className="absolute inset-0 bg-black/30" />
-        <motion.div 
-          className="absolute md:inset-0 bottom-6 flex items-center justify-center text-center text-white"
-          {...fadeInUp}
-        >
-          <div className="space-y-6 px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <h1 className="text-3xl md:text-7xl font-serif mb-4">{propertyData.title}</h1>
-              <p className="text-xl hidden md:block font-light tracking-wide">{propertyData.location}</p>
-            </motion.div>
-            <div className="flex flex-wrap justify-center gap-4">
-              {propertyData.approvals.map((approval, idx) => (
-                <span key={idx} className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm">
-                  {approval}
-                </span>
-              ))}
-            </div>
-            
-          </div>
-        </motion.div>
-      </section>
+      <HeroCarousel images={propertyData.heroImages}
+  title={propertyData.title}
+  location={propertyData.location}
+  approvals={propertyData.approvals} />
+
       <FeaturedProperties/>
       <section className="py-32 bg-[#f8f5f0]">
       <div className="container mx-auto max-w-7xl px-4">
@@ -89,9 +54,13 @@ export default function PropertyFeatureShowcase() {
             {floorPlans.map((plan, idx) => (
               <motion.button
                 key={idx}
+                ref={ref}
+                initial={{ opacity: 0, y: 50 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
                 className={`w-full p-6 text-left rounded-xl shadow-[0px_4px_0px_0px_rgb(0,0,0)] transition-all ${
                   selectedPlan.type === plan.type 
-                    ? 'bg-navy text-white' 
+                    ? 'bg-black text-white' 
                     : 'bg-white hover:bg-navy/5'
                 }`}
                 onClick={() => setSelectedPlan(plan)}
@@ -110,8 +79,10 @@ export default function PropertyFeatureShowcase() {
           <motion.div 
             className="lg:col-span-2 bg-white rounded-2xl p-8 shadow-[4px_4px_0px_0px_rgb(0,0,0)] border-2 border-black"
             key={selectedPlan.type}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            ref={ref}
+            initial={{ opacity: 0, y: 50 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
@@ -153,7 +124,7 @@ export default function PropertyFeatureShowcase() {
     </section>
 
        {/* Features Grid */}
-       <section className="py-16 md:py-32 px-4">
+       {/* <section className="py-16 md:py-32 px-4">
         <div className="container mx-auto max-w-7xl">
           <motion.div 
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
@@ -193,7 +164,7 @@ export default function PropertyFeatureShowcase() {
             ))}
           </motion.div>
         </div>
-      </section>
+      </section> */}
 
 
       {/* Amenities Showcase */}
@@ -206,7 +177,7 @@ export default function PropertyFeatureShowcase() {
    <section className="bg-[#f8f5f0] py-16 md:py-32">
         <div className="container mx-auto max-w-7xl px-4">
           <motion.div 
-            className="bg-white rounded-3xl p-8 md:p-12 shadow-2xl"
+            className="bg-white rounded-3xl p-8 md:p-12 shadow-[4px_4px_0px_0px_rgb(0,0,0)] border-2 border-black"
             {...fadeInUp}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">

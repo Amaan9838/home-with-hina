@@ -11,10 +11,9 @@ export default function Home() {
     <div className="bg-cream">
       
       {/* Initial Impact Section */}
-      {/* <Hero /> */}
       <FeatureShowcase/>
       
-      <VirtualStaging />
+      {/* <VirtualStaging /> */}
       <Neighbourhood/>
     
       {/* Trust Building Section */}

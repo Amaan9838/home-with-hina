@@ -112,11 +112,11 @@ export default function AmenitiesShowcase() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="mt-20 p-8 rounded-3xl bg-white/5 backdrop-blur-lg"
+          className="mt-20 p-8 rounded-3xl bg-black/80 backdrop-blur-lg"
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-white">
-              <h4 className="text-xl mb-4 font-medium">Essential Services</h4>
+              <h4 className="text-xl mb-4 font-semibold">Essential Services</h4>
               <ul className="space-y-3">
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-gold rounded-full" />
@@ -133,7 +133,7 @@ export default function AmenitiesShowcase() {
               </ul>
             </div>
             <div className="text-white">
-              <h4 className="text-xl mb-4 font-medium">Outdoor Spaces</h4>
+              <h4 className="text-xl mb-4 font-semibold">Outdoor Spaces</h4>
               <ul className="space-y-3">
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-gold rounded-full" />
@@ -150,7 +150,7 @@ export default function AmenitiesShowcase() {
               </ul>
             </div>
             <div className="text-white">
-              <h4 className="text-xl mb-4 font-medium">Parking</h4>
+              <h4 className="text-xl mb-4 font-semibold">Parking</h4>
               <ul className="space-y-3">
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-gold rounded-full" />

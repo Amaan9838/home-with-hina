@@ -1,41 +1,193 @@
+'use client';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Navigation, Pagination, EffectFade } from 'swiper/modules';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
 
-export default function Hero() {
+const HeroCarousel = ({ images, title, location, approvals }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const words = title.split(' ');
+
   return (
-    <div className="relative h-screen">
-      <Image
-        src="https://10web-site.ai/265/wp-content/uploads/sites/277/2025/01/tenweb_media_yCK5Yewn.webp"
-        alt="Luxury Home"
-        fill
-        className="object-cover"
-        priority
-      />
-      <div className="absolute inset-0 bg-black/40" />
-      
-      <main className="relative z-10 px-4 pt-20 md:pt-40">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl text-white font-semibold mb-4">
-            Discover Your <span className="border-b-4 border-white">Dream Home</span>
-            <br />Today
-          </h1>
-          
-          <p className="max-w-3xl mx-auto text-white text-lg md:text-xl mb-12 leading-relaxed">
-            Experience the epitome of luxury living with our exclusive range of 1BHK, 2BHK, 
-            and 3BHK flats. Home with Hina offers unparalleled elegance and comfort, 
-            designed to meet your every need. Explore our premium properties and find your 
-            perfect sanctuary.
-          </p>
+    <section className="relative h-screen overflow-hidden touch-pan-y">
+      <Swiper
+        modules={[Autoplay, Navigation, Pagination, EffectFade]}
+        effect={'slide'}
+        spaceBetween={0}
+        slidesPerView={1}
+        navigation={{
+          enabled: true,
+        }}
+        pagination={{
+          clickable: true,
+          renderBullet: function (index, className) {
+            return '<span class="' + className + ' custom-bullet"></span>';
+          },
+        }}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        }}
+        loop={true}
+        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+        className="h-full w-full"
+        touchEventsTarget="container"
+        touchRatio={1.5}
+        touchAngle={45}
+        grabCursor={true}
+      >
+        {images.map((image, index) => (
+          <SwiperSlide 
+            key={index} 
+            className="relative touch-pan-y"
+          >
+            <div className="h-full w-full">
+              <Image
+                src={image}
+                fill
+                className="object-cover select-none"
+                alt={`Property View ${index + 1}`}
+                priority={index === 0}
+                draggable={false}
+              />
+              <div className="absolute inset-0 bg-black/30" />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
-          <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6">
-            <button className="text-white shadow-[2px_2px_0px_0px_rgb(255,255,255)] px-6 py-3 rounded-3xl border-white bg-[#8d6d36] hover:opacity-80  border">
-              View Listings
-            </button>
-            <button className="px-8 py-3 border border-white shadow-[2px_2px_0px_0px_rgb(255,255,255)] text-white rounded-full hover:bg-[#8d6d36] hover:opacity-80 transition w-full md:w-auto">
-              Contact Us
-            </button>
-          </div>
+      {/* Content Overlay - Now with one-time animation */}
+      <motion.div 
+        className="absolute inset-0 z-10 flex items-center justify-center text-center text-white pointer-events-none"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="space-y-6 px-4">
+          {/* Title with one-time word animation */}
+          <motion.h1 
+            className="text-3xl md:text-7xl font-serif mb-4 flex flex-wrap justify-center gap-x-4"
+          >
+            {words.map((word, index) => (
+              <motion.span
+                key={index}
+                initial={{ y: 100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{
+                  type: "spring",
+                  damping: 12,
+                  stiffness: 100,
+                  delay: index * 0.1,
+                }}
+                className="inline-block"
+              >
+                {word}
+              </motion.span>
+            ))}
+          </motion.h1>
+          
+          {/* Location with one-time animation */}
+          <motion.p 
+            className="text-xl hidden md:block font-light tracking-wide"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+          >
+            {location}
+          </motion.p>
+
+          {/* Approvals with one-time animation */}
+          <motion.div 
+            className="flex flex-wrap justify-center gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+          >
+            {approvals.map((approval, idx) => (
+              <motion.span 
+                key={idx}
+                whileHover={{ scale: 1.05 }}
+                className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm"
+              >
+                {approval}
+              </motion.span>
+            ))}
+          </motion.div>
         </div>
-      </main>
-    </div>
+      </motion.div>
+
+      {/* Styles remain the same */}
+      <style jsx global>{`
+        .swiper {
+          touch-action: pan-y;
+          user-select: none;
+          -webkit-user-select: none;
+          -webkit-touch-callout: none;
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+          color: white !important;
+          background: rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(4px);
+          width: 50px !important;
+          height: 50px !important;
+          border-radius: 50%;
+          transition: all 0.3s ease;
+        }
+
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+          background: rgba(255, 255, 255, 0.3);
+        }
+
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+          font-size: 20px !important;
+        }
+
+        .swiper-pagination {
+          bottom: 30px !important;
+        }
+
+        .swiper-pagination-bullet {
+          width: 8px;
+          height: 8px;
+          background: rgba(255, 255, 255, 0.5);
+          opacity: 1;
+          transition: all 0.3s ease;
+        }
+
+        .swiper-pagination-bullet-active {
+          width: 24px;
+          border-radius: 4px;
+          background: white;
+        }
+
+        @media (max-width: 768px) {
+          .swiper-button-next,
+          .swiper-button-prev {
+            display: none !important;
+          }
+          
+          .swiper-pagination-bullet {
+            width: 6px;
+            height: 6px;
+          }
+          
+          .swiper-pagination-bullet-active {
+            width: 20px;
+          }
+        }
+      `}</style>
+    </section>
   );
-}
+};
+
+export default HeroCarousel;

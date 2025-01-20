@@ -9,10 +9,10 @@ const PropertyCard = ({ title, description, image }) => {
 
   return (
     <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 50 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+    ref={ref}
+    initial={{ opacity: 0, y: 50 }}
+    animate={isInView ? { opacity: 1, y: 0 } : {}}
+    transition={{ duration: 0.6, ease: 'easeOut' }}
       className="bg-white rounded-3xl shadow-[2px_2px_0px_0px_rgb(0,0,0)] border border-black overflow-hidden"
     >
       <div className="relative h-64">
